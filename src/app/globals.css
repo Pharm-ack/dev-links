@@ -2,32 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 252 0% 100%;
+    --foreground: 252 0% 10%;
+    --card: 252 0% 100%;
+    --card-foreground: 252 0% 15%;
+    --popover: 252 0% 100%;
+    --popover-foreground: 252 95% 10%;
+    --primary: 252 100% 61.8%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 252 10% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 214 10% 95%;
+    --muted-foreground: 252 0% 40%;
+    /* --accent: 214 10% 90%; */
+    --accent-foreground: 252 0% 15%;
+    --destructive: 0 50% 50%;
+    --destructive-foreground: 252 0% 100%;
+    --border: 252 20% 82%;
+    --input: 252 20% 50%;
+    --ring: 252 100% 61.8%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 252 10% 10%;
+    --foreground: 252 0% 100%;
+    --card: 252 0% 10%;
+    --card-foreground: 252 0% 100%;
+    --popover: 252 10% 5%;
+    --popover-foreground: 252 0% 100%;
+    --primary: 252 100% 61.8%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 252 10% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 214 10% 25%;
+    --muted-foreground: 252 0% 65%;
+    --accent: 214 10% 25%;
+    --accent-foreground: 252 0% 95%;
+    --destructive: 0 50% 50%;
+    --destructive-foreground: 252 0% 100%;
+    --border: 252 20% 50%;
+    --input: 252 20% 50%;
+    --ring: 252 100% 61.8%;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Webkit browsers like Chrome, Safari */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px; /* Adjust this value to change scrollbar width */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #633cff;
+    border-radius: 20px;
+  }
+
+  /* Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #633cff;
   }
 }
