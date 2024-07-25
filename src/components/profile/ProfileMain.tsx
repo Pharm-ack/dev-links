@@ -27,7 +27,7 @@ function ProfileMain({
   userProfile,
 }: {
   links: link[];
-  userProfile: User | null;
+  userProfile: User | null; //omit the password in the user object
 }) {
   const [imagePreview, setImagePreview] = useState<string | null>(
     userProfile?.image && userProfile.image !== "null"

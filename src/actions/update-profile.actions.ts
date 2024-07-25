@@ -13,13 +13,6 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpg", "image/png"];
 const UserProfileSchema = z.object({
   firstName: z.string().trim().min(1, { message: "Required" }),
   lastName: z.string().trim().min(1, { message: "Required" }),
-  username: z
-    .string()
-    .trim()
-    .min(1, { message: "Required" })
-    .refine((n) => /^[a-zA-Z0-9_.-]+$/.test(n), {
-      message: "Only number and characters are allowed.",
-    }),
   email: z.string().email("Invalid email"),
 });
 
@@ -44,7 +37,6 @@ export type ProfileFormState = {
   errors: {
     firstName?: string[];
     lastName?: string[];
-    username?: string[];
     email?: string[];
   };
   success?: string;

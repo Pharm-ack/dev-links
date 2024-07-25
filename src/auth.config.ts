@@ -1,4 +1,4 @@
-import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "next-auth/providers/credentials";
 import { LoginSchema } from "@/schemas/index";
 import { getUserByEmail } from "@/lib/user";
 import bcrypt from "bcryptjs";
@@ -6,33 +6,36 @@ import type { NextAuthConfig } from "next-auth";
 
 export default {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
+    Credentials({
       async authorize(credentials) {
-        // runs on login
-        // validation
+        console.log("Authorize function called with credentials:", credentials);
+
         const validatedFormData = LoginSchema.safeParse(credentials);
         if (!validatedFormData.success) {
+          console.log("Validation failed:", validatedFormData.error);
           return null;
         }
-        // extract values
+
         const { email, password } = validatedFormData.data;
+        console.log("Validated email:", email);
+
         const user = await getUserByEmail(email);
-        if (!user) {
-          console.log("No user found");
+        console.log("User found:", user ? "Yes" : "No");
+
+        if (!user || !user.password) {
+          console.log("No user found or user has no password");
           return null;
         }
-        const passwordsMatch = user.password
-          ? await bcrypt.compare(password, user.password)
-          : false;
+
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        console.log("Passwords match:", passwordsMatch);
+
         if (!passwordsMatch) {
-          console.log("Invalid credentials");
+          console.log("Invalid password");
           return null;
         }
+
+        console.log("Authentication successful");
         return user;
       },
     }),

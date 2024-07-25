@@ -13,27 +13,41 @@ export async function login(formData: FormData) {
     password: formData.get("password"),
   };
 
+  console.log("Login function called with data:", data);
+
   const validatedUser = LoginSchema.safeParse(data);
 
   if (!validatedUser.success) {
+    console.log("Validation failed:", validatedUser.error);
     return { error: "Invalid Credentials!" };
   }
 
-  const { password, email } = validatedUser.data;
+  const { email, password } = validatedUser.data;
 
   try {
-    await signIn("credentials", { email, password, redirect: false });
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    console.log("SignIn result:", result);
+
+    if (result?.error) {
+      return { error: result.error };
+    }
+
     return { success: "Login successful" };
   } catch (error) {
+    console.error("Login error:", error);
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Invalid credentials." };
         default:
-          return { error: "Invalid credentials." };
+          return { error: "An error occurred during login." };
       }
     }
-    return { error: "Invalid credentials." };
+    return { error: "An unexpected error occurred." };
   }
 }
 
