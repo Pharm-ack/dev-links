@@ -7,6 +7,11 @@ import { getUserByEmail } from "@/lib/user";
 import Image from "next/image";
 import Link from "next/link";
 
+const domain =
+  process.env.NODE_ENV === "production"
+    ? "https://dev-links-neon.vercel.app"
+    : "http://localhost:3000";
+
 async function ProfilePage() {
   const links = await getLinks();
   const session = await auth();
@@ -17,7 +22,7 @@ async function ProfilePage() {
       <nav className="flex w-full sm:hidden items-center justify-between py-4 px-6 z-30 sm:bg-white sm:mt-4 rounded-2xl">
         <BackToEditor />
 
-        <CopyLinkToClipboard domain={process.env.NEXT_PUBLIC as string} />
+        <CopyLinkToClipboard domain={domain as string} />
       </nav>
       <div className="hidden sm:block bg-primary w-screen h-[300px] rounded-b-3xl sm:px-4">
         <nav className="flex w-full items-center justify-between py-4 px-6 z-30 sm:bg-white sm:mt-4 rounded-2xl">

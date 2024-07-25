@@ -19,8 +19,13 @@ import { toast } from "sonner";
 import { createUploadThingHook } from "@/lib/uploadthing";
 import ToastMessage from "../toast/Toast";
 
+const uploadUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://dev-links-neon.vercel.app/api/uploadthing"
+    : "http://localhost:3000/api/uploadthing";
+
 const uploadHook = createUploadThingHook({
-  url: "http://localhost:3000/api/uploadthing",
+  url: uploadUrl,
 });
 
 function ProfileMain({
