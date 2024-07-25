@@ -47,7 +47,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <Card className="mx-auto w-[311px] sm:w-[396px] lg:w-[476px]">
+    <Card className="mx-auto w-full md:w-[476px]">
       <CardHeader>
         <CardTitle className="text-2xl">Create account</CardTitle>
         <CardDescription>
@@ -153,6 +153,10 @@ export default function RegisterForm() {
                 )}
               </div>
             </div>
+
+            <p className=" text-[#737373] text-sm">
+              Password must contain at least 8 characters
+            </p>
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -166,6 +170,7 @@ export default function RegisterForm() {
             </Button>
           </div>
         </form>
+
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}
           <Link href="/login" className="text-primary">
