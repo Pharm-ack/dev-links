@@ -59,8 +59,6 @@ function LinkMain({
 
   const [state, setState] = useState({ errors: [{}] });
 
-  console.log(state);
-
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
   const sensors = useSensors(mouseSensor, touchSensor);
@@ -200,14 +198,14 @@ function LinkMain({
   }
 
   return (
-    <main className="flex-1 flex flex-col lg:flex-row gap-x-5 p-4 bg-[#FAFAFA]/50">
-      <section className="lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
-        <div className="mt-20">
+    <section className="flex-1 flex flex-col lg:flex-row gap-x-5 py-4">
+      <section className="rounded-md lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
+        <div className="mt-10">
           <PhoneMockUp userProfile={userProfile} links={newLinks} color="" />
         </div>
       </section>
 
-      <section className="relative flex-1 flex bg-white">
+      <section className="rounded-md relative flex-1 flex bg-white">
         <div className="p-6 flex-col flex flex-1">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
             Customize your links
@@ -343,7 +341,7 @@ function LinkMain({
         </div>
         <div className="w-full absolute bottom-20 border-t border-[#D9D9D9]" />
       </section>
-    </main>
+    </section>
   );
 }
 

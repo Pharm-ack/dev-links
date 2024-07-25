@@ -37,18 +37,22 @@ function PhoneMockUp({
         stroke="#737373"
         d="M12 55.5C12 30.923 31.923 11 56.5 11h24C86.851 11 92 16.149 92 22.5c0 8.008 6.492 14.5 14.5 14.5h95c8.008 0 14.5-6.492 14.5-14.5 0-6.351 5.149-11.5 11.5-11.5h24c24.577 0 44.5 19.923 44.5 44.5v521c0 24.577-19.923 44.5-44.5 44.5h-195C31.923 621 12 601.077 12 576.5v-521Z"
       />
-      <circle cx="153.5" cy="112" r="48" fill="#EEE" />
-      <rect width="72" height="8" x="117.5" y="214" fill="#EEE" rx="4" />
-      <rect width="160" height="16" x="73.5" y="185" fill="#EEE" rx="8" />
+      {!userProfile && (
+        <>
+          <circle cx="153.5" cy="112" r="48" fill="#EEE" />
+          <rect width="72" height="8" x="117.5" y="214" fill="#EEE" rx="4" />
+          <rect width="160" height="16" x="73.5" y="185" fill="#EEE" rx="8" />
+        </>
+      )}
 
-      <foreignObject x="105.5" y="64" width="96" height="96">
+      <foreignObject x="105.5" y="64" width="104" height="110">
         {userProfile?.image ? (
           <Image
             src={userProfile.image}
             alt="Profile"
-            width={96}
-            height={96}
-            className="rounded-full object-cover"
+            width={104}
+            height={104}
+            className="h-[110px] w-[110px] object-cover rounded-full border-4 border-primary"
           />
         ) : (
           <div className="w-24 h-24 rounded-full bg-[#EEE] flex items-center justify-center text-4xl text-[#737373]">
@@ -60,7 +64,7 @@ function PhoneMockUp({
       {/* Name */}
       <text
         x="154"
-        y="195"
+        y="205"
         textAnchor="middle"
         fill="#333"
         fontSize="18"
@@ -70,7 +74,7 @@ function PhoneMockUp({
       </text>
 
       {/* Email */}
-      <text x="154" y="220" textAnchor="middle" fill="#737373" fontSize="14">
+      <text x="154" y="230" textAnchor="middle" fill="#737373" fontSize="14">
         {userProfile?.email || ""}
       </text>
 

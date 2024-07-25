@@ -107,13 +107,13 @@ function ProfileMain({
     }
   }, [state]);
   return (
-    <main className="flex-1 flex flex-col lg:flex-row gap-x-5 p-4 bg-[#FAFAFA]/50">
-      <section className="lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
-        <div className="mt-20">
+    <section className="flex-1 flex flex-col lg:flex-row gap-x-5 py-4">
+      <section className=" rounded-md lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
+        <div className="mt-10">
           <PhoneMockUp links={links} color="" userProfile={userProfileState} />
         </div>
       </section>
-      <section className="relative flex-1 flex bg-white">
+      <section className=" rounded-md relative flex-1 flex bg-white">
         <div className="pt-6 flex-1 flex flex-col">
           <div className="px-10">
             <h1 className="text-2xl md:text-3xl font-bold mb-2">
@@ -196,6 +196,11 @@ function ProfileMain({
                       }
                     />
                     <p className="font-semibold z-10">+ Upload Image</p>
+                    {isUploading && (
+                      <p className="text-primary">
+                        Uploading...{uploadProgress}%
+                      </p>
+                    )}
                   </label>
 
                   <div className="flex flex-col sm:items-center items-start justify-center text-grey body-s">
@@ -320,7 +325,7 @@ function ProfileMain({
           />
         )}
       </section>
-    </main>
+    </section>
   );
 }
 
