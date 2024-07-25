@@ -36,7 +36,7 @@ export function DashboardNavigation() {
       </Link>
       <div className="flex space-x-2">
         <Button className={navButtonClass("/links")} variant="ghost" asChild>
-          <Link href="/dashboard/links">
+          <Link href="/links">
             <LinkIcon className="w-4 h-4" />
             <span className="hidden md:inline-flex">Links</span>
           </Link>

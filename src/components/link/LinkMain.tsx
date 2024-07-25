@@ -17,6 +17,8 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { deleteLinks, saveLinks } from "@/actions/link.action";
 import { platform } from "@/lib/data";
 import SubmitButton from "../form/SubmitButton";
+import { getUserProfile } from "@/actions/update-profile.actions";
+import { User } from "@prisma/client";
 
 const Base_X = 35;
 const Base_Y = 278;
@@ -39,7 +41,13 @@ export type link = {
   url: string;
 };
 
-function LinkMain({ links }: { links: link[] }) {
+function LinkMain({
+  links,
+  userProfile,
+}: {
+  links: link[];
+  userProfile: User | null; //omit the password in the user object
+}) {
   const [trash, setTrash] = useState<link[] | null>(null);
   const [stagedTrash, setStagedTrash] = useState<link[] | null>(null);
   const [activeLink, setActiveLink] = useState<link | null>(null);
@@ -195,7 +203,7 @@ function LinkMain({ links }: { links: link[] }) {
     <main className="flex-1 flex flex-col lg:flex-row gap-x-5 p-4 bg-[#FAFAFA]/50">
       <section className="lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
         <div className="mt-20">
-          <PhoneMockUp links={newLinks} color="" />
+          <PhoneMockUp userProfile={userProfile} links={newLinks} color="" />
         </div>
       </section>
 

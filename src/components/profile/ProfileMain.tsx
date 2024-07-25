@@ -17,6 +17,7 @@ import { FaSave } from "react-icons/fa";
 import SubmitButton from "../form/SubmitButton";
 import { toast } from "sonner";
 import { createUploadThingHook } from "@/lib/uploadthing";
+import ToastMessage from "../toast/Toast";
 
 const uploadHook = createUploadThingHook({
   url: "http://localhost:3000/api/uploadthing",
@@ -34,6 +35,23 @@ function ProfileMain({
       ? userProfile.image
       : null
   );
+
+  const [userProfileState, setUserProfileState] = useState({
+    image:
+      userProfile?.image && userProfile.image !== "null"
+        ? userProfile.image
+        : null,
+    first_name:
+      userProfile?.first_name && userProfile.first_name !== "null"
+        ? userProfile.first_name
+        : null,
+    last_name:
+      userProfile?.last_name && userProfile.last_name !== "null"
+        ? userProfile.last_name
+        : null,
+    email: userProfile?.email ? userProfile.email : null,
+  });
+
   const [firstName, setFirstName] = useState<string | null>(
     userProfile?.first_name && userProfile.first_name !== "null"
       ? userProfile.first_name
@@ -68,6 +86,7 @@ function ProfileMain({
       if (res?.length > 0) {
         setImagePreview(res[0].url);
         setImgFile(res[0].url);
+        setUserProfileState((prev) => ({ ...prev, image: res[0].url }));
         toast.success("Image uploaded successfully");
       }
     } catch (e) {
@@ -83,13 +102,13 @@ function ProfileMain({
     }
   }, [state]);
   return (
-    <main className="flex-1 md:grid md:grid-cols-5 md:gap-4 p-4 bg-[#FAFAFA]/50">
-      <section className="md:flex hidden md:col-span-2 items-start justify-center bg-white md:flex-1">
+    <main className="flex-1 flex flex-col lg:flex-row gap-x-5 p-4 bg-[#FAFAFA]/50">
+      <section className="lg:flex hidden w-[450px] p-4 items-start justify-center bg-white">
         <div className="mt-20">
-          <PhoneMockUp links={links} color="" />
+          <PhoneMockUp links={links} color="" userProfile={userProfileState} />
         </div>
       </section>
-      <section className="flex-1 flex flex-col md:col-span-3 bg-white pt-10">
+      <section className="relative flex-1 flex bg-white">
         <div className="pt-6 flex-1 flex flex-col">
           <div className="px-10">
             <h1 className="text-2xl md:text-3xl font-bold mb-2">
@@ -123,6 +142,14 @@ function ProfileMain({
               const response = await updateProfile(formData);
               if (response) {
                 setPending(false);
+                if (response.success) {
+                  setUserProfileState({
+                    image: imgFile || userProfileState.image,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                  });
+                }
               }
               setState(response);
             }}
@@ -281,8 +308,12 @@ function ProfileMain({
           </form>
         </div>
 
-        {state?.success &&
-          toast.success(<div>Your changes have been successfully saved!</div>)}
+        {state?.success && (
+          <ToastMessage
+            icon={<FaSave className="w-6 h-6" />}
+            message="Your changes have been successfully saved!"
+          />
+        )}
       </section>
     </main>
   );

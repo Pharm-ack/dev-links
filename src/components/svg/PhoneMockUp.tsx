@@ -1,18 +1,23 @@
-
 import IconGithub from "./IconGithub";
 import { platform } from "os";
 import { useEffect, useState } from "react";
 import IconArrowRight from "./IconArrowRight";
 import { link } from "../link/LinkMain";
-
-
+import Image from "next/image";
 
 function PhoneMockUp({
   color,
   links,
+  userProfile,
 }: {
   color: string;
   links: link[] | null;
+  userProfile: {
+    image: string | null;
+    first_name: string | null;
+    last_name: string | null;
+    email: string | null;
+  } | null;
 }) {
   const onlyFiveLinks = links && links?.length > 5 ? links?.slice(0, 5) : links;
   return (
@@ -36,11 +41,44 @@ function PhoneMockUp({
       <rect width="72" height="8" x="117.5" y="214" fill="#EEE" rx="4" />
       <rect width="160" height="16" x="73.5" y="185" fill="#EEE" rx="8" />
 
+      <foreignObject x="105.5" y="64" width="96" height="96">
+        {userProfile?.image ? (
+          <Image
+            src={userProfile.image}
+            alt="Profile"
+            width={96}
+            height={96}
+            className="rounded-full object-cover"
+          />
+        ) : (
+          <div className="w-24 h-24 rounded-full bg-[#EEE] flex items-center justify-center text-4xl text-[#737373]">
+            ?
+          </div>
+        )}
+      </foreignObject>
+
+      {/* Name */}
+      <text
+        x="154"
+        y="195"
+        textAnchor="middle"
+        fill="#333"
+        fontSize="18"
+        fontWeight="bold"
+      >
+        {`${userProfile?.first_name || ""} ${userProfile?.last_name || ""}`}
+      </text>
+
+      {/* Email */}
+      <text x="154" y="220" textAnchor="middle" fill="#737373" fontSize="14">
+        {userProfile?.email || ""}
+      </text>
+
       {(!onlyFiveLinks || onlyFiveLinks.length === 0) && (
         <>
           <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
-            <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
-            <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
           <rect width="237" height="44" x="35" y="470" fill="#EEE" rx="8" />
           <rect width="237" height="44" x="35" y="534" fill="#EEE" rx="8" />
         </>
@@ -58,11 +96,27 @@ function PhoneMockUp({
               fill={link.platform.brandColor}
               rx="8"
             />
-            <text x={link.platform.coordinates.x as number + 40} y={link.platform.coordinates.y as number + 28} fill={"#fff"} fontSize={16}>
+            <text
+              x={(link.platform.coordinates.x as number) + 40}
+              y={(link.platform.coordinates.y as number) + 28}
+              fill={"#fff"}
+              fontSize={16}
+            >
               {link.platform.name}
             </text>
-            <svg x={link.platform.coordinates.x as number + 13} y={link.platform.coordinates.y as number + 15} width={16} height={16}>{link.platform.mockUpIcon}</svg>
-            <IconArrowRight color="" x={link.platform.coordinates.x as number + 200} y={link.platform.coordinates.y as number + 15} />
+            <svg
+              x={(link.platform.coordinates.x as number) + 13}
+              y={(link.platform.coordinates.y as number) + 15}
+              width={16}
+              height={16}
+            >
+              {link.platform.mockUpIcon}
+            </svg>
+            <IconArrowRight
+              color=""
+              x={(link.platform.coordinates.x as number) + 200}
+              y={(link.platform.coordinates.y as number) + 15}
+            />
           </g>
         ))}
     </svg>

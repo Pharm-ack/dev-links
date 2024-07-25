@@ -27,13 +27,10 @@ async function ProfilePage() {
           >
             Back to Editor
           </Link>
-          <CopyLinkToClipboard
-            // username={username}
-            domain={process.env.NEXT_PUBLIC as string}
-          />
+          <CopyLinkToClipboard domain={process.env.NEXT_PUBLIC as string} />
         </nav>
       </div>
-      <section className="flex flex-col gap-4 justify-center items-center mt-12 sm:rounded-2xl sm:top-[120px] sm:left-[50%] sm:right-[50%] sm:-translate-x-[50%] sm:w-fit sm:z-50 sm:bg-white sm:absolute sm:py-10 sm:px-12">
+      <section className="flex flex-col gap-4 justify-center items-center mt-12 sm:rounded-2xl sm:top-[70px] sm:left-[50%] sm:right-[50%] sm:-translate-x-[50%] sm:w-fit sm:z-50 sm:bg-white sm:absolute sm:py-10 sm:px-12">
         {user?.image ? (
           <Image
             width={104}
@@ -66,7 +63,7 @@ async function ProfilePage() {
                 target="_blank"
                 key={link.id}
                 style={{ backgroundColor: link.platform.brandColor }}
-                className="relative flex items-center gap-2 min-w-[240px] text-white fill-white rounded-md px-4 py-4"
+                className="relative flex items-center gap-2 min-w-[240px] text-white fill-white rounded-md px-3 py-1"
               >
                 {link.platform.icon}
                 <span className="ml-8">{link.platform.name}</span>
@@ -81,7 +78,7 @@ async function ProfilePage() {
                 target="_blank"
                 key={link.id}
                 style={{ backgroundColor: link.platform.brandColor }}
-                className="relative flex items-center gap-2 min-w-[240px] text-white fill-white rounded-md px-4 py-4"
+                className="relative flex items-center gap-2 min-w-[240px] text-white fill-white rounded-md px-3 py-2"
               >
                 {link.platform.icon}
                 <span className="ml-8">{link.platform.name}</span>
