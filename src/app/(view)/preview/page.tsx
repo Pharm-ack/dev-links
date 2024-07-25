@@ -51,14 +51,16 @@ async function ProfilePage() {
         )}
 
         {user?.first_name && user?.last_name ? (
-          <h1 className="heading-m text-darkgrey text-nowrap">
+          <h3 className="text-3xl md:text-4xl font-bold text-nowrap">
             {user?.first_name + " " + user?.last_name}
-          </h1>
+          </h3>
         ) : (
-          <h1 className="heading-m text-darkgrey text-nowrap">Your name...</h1>
+          <h1 className="text-3xl md:text-4xl font-boldtext-nowrap">
+            Your name...
+          </h1>
         )}
 
-        <p className="text-grey">{user?.email}</p>
+        <p className="text-gray-300">{user?.email}</p>
         <div className="flex flex-col mt-8 gap-4">
           {links &&
             links.length > 5 &&
