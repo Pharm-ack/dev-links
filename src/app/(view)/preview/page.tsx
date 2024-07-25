@@ -22,7 +22,7 @@ async function ProfilePage() {
       <nav className="flex w-full sm:hidden items-center justify-between py-4 px-6 z-30 sm:bg-white sm:mt-4 rounded-2xl">
         <BackToEditor />
 
-        <CopyLinkToClipboard domain={domain as string} />
+        <CopyLinkToClipboard url={domain as string} isShareButton={true} />
       </nav>
       <div className="hidden sm:block bg-primary w-screen h-[300px] rounded-b-3xl sm:px-4">
         <nav className="flex w-full items-center justify-between py-4 px-6 z-30 sm:bg-white sm:mt-4 rounded-2xl">
@@ -32,7 +32,7 @@ async function ProfilePage() {
           >
             Back to Editor
           </Link>
-          <CopyLinkToClipboard domain={process.env.NEXT_PUBLIC as string} />
+          <CopyLinkToClipboard url={domain as string} isShareButton={true} />
         </nav>
       </div>
       <section className="flex flex-col gap-4 justify-center items-center mt-12 sm:rounded-2xl sm:top-[70px] sm:left-[50%] sm:right-[50%] sm:-translate-x-[50%] sm:w-fit sm:z-50 sm:bg-white sm:absolute sm:py-10 sm:px-12">
@@ -55,7 +55,7 @@ async function ProfilePage() {
             {user?.first_name + " " + user?.last_name}
           </h3>
         ) : (
-          <h1 className="text-3xl md:text-4xl font-boldtext-nowrap">
+          <h1 className="text-3xl md:text-4xl font-bold text-nowrap">
             Your name...
           </h1>
         )}
@@ -80,17 +80,13 @@ async function ProfilePage() {
           {links &&
             links.length <= 5 &&
             links.map((link) => (
-              <Link
-                href={link.url}
-                target="_blank"
+              <CopyLinkToClipboard
                 key={link.id}
-                style={{ backgroundColor: link.platform.brandColor }}
-                className="relative flex items-center gap-2 min-w-[240px] text-white fill-white rounded-md px-3 py-2"
-              >
-                {link.platform.icon}
-                <span className="ml-8">{link.platform.name}</span>
-                <IconArrowRight color="fill-white ml-auto" />
-              </Link>
+                url={link.url}
+                platformName={link.platform.name}
+                platformIcon={link.platform.icon}
+                brandColor={link.platform.brandColor}
+              />
             ))}
 
           {!links.length && <p className="text-center">No links found</p>}

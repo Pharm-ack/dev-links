@@ -25,7 +25,7 @@ export function DashboardNavigation() {
           width={32}
           height={32}
           alt="Logo"
-          className="w-8 h-8 md:w-[32px] md:h-[32px]"
+          className="w-10 h-10 md:w-[32px] md:h-[32px]"
         />
         <Image
           className="hidden md:inline-flex"
@@ -38,13 +38,13 @@ export function DashboardNavigation() {
       <div className="flex space-x-3">
         <Button className={navButtonClass("/links")} variant="ghost" asChild>
           <Link href="/links">
-            <LinkIcon className="w-8 h-8 md:w-4 md:h-4" />
+            <LinkIcon className="w-6 h-6 md:w-4 md:h-4" />
             <span className="hidden md:inline-flex">Links</span>
           </Link>
         </Button>
         <Button className={navButtonClass("/profile")} variant="ghost" asChild>
           <Link href="/profile">
-            <CircleUserRound className="w-8 h-8 md:w-4 md:h-4 " />
+            <CircleUserRound className="w-6 h-6 md:w-4 md:h-4 " />
             <span className="hidden md:inline-flex">Profile Details</span>
           </Link>
         </Button>
