@@ -47,7 +47,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <Card className="mx-auto w-full md:w-[476px]">
+    <div className="mx-auto w-full md:w-[476px] rounded-md sm:shadow-md sm:bg-white">
       <CardHeader>
         <CardTitle className="text-2xl">Create account</CardTitle>
         <CardDescription>
@@ -178,6 +178,6 @@ export default function RegisterForm() {
           </Link>
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 }

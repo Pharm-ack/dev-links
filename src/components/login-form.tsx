@@ -47,7 +47,7 @@ export default function LoginForm() {
   }
 
   return (
-    <Card className="mx-auto w-full md:w-[476px]">
+    <div className="mx-auto w-full md:w-[476px] rounded-md sm:shadow-md sm:bg-white">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
@@ -142,6 +142,6 @@ export default function LoginForm() {
           </Link>
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 }
