@@ -4,10 +4,10 @@ import { urlValidator } from "@/lib/data";
 
 export const LoginSchema = z.object({
   email: z.string().email({
-    message: "Please enter a valid email address",
+    message: "Can't be empty",
   }),
   password: z.string().min(1, {
-    message: "Please enter your password",
+    message: "Please check again",
   }),
 });
 
@@ -67,9 +67,12 @@ export const saveLinksSchema = (formData: FormData) => {
     }
   });
 
-  const zodValidation = validation.reduce((acc, curr) => {
-    return { ...acc, ...curr };
-  }, {} as { [x: string]: ZodEffects<ZodString, string, string> | ZodString });
+  const zodValidation = validation.reduce(
+    (acc, curr) => {
+      return { ...acc, ...curr };
+    },
+    {} as { [x: string]: ZodEffects<ZodString, string, string> | ZodString }
+  );
 
   const schema = object(zodValidation);
 
@@ -78,9 +81,12 @@ export const saveLinksSchema = (formData: FormData) => {
   }, {});
 
   const result = schema.safeParse({
-    ...keys.reduce((acc, curr) => {
-      return { ...acc, [curr]: formData.get(curr) };
-    }, {} as typeof schemaType),
+    ...keys.reduce(
+      (acc, curr) => {
+        return { ...acc, [curr]: formData.get(curr) };
+      },
+      {} as typeof schemaType
+    ),
   });
 
   let count: number = 1;
