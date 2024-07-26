@@ -9,7 +9,7 @@ import { Prisma } from "@prisma/client";
 
 export const saveLinks = async (
   formData: FormData
-): Promise<{ errors: structureTypeArray | {}[] }> => {
+): Promise<{ errors: structureTypeArray | {}[]; success?: string }> => {
   const { result, errors } = saveLinksSchema(formData);
 
   if (!result.success) {
@@ -78,6 +78,7 @@ export const saveLinks = async (
   revalidatePath("/links");
   return {
     errors: [{}],
+    success: "Links saved successfully!",
   };
 };
 

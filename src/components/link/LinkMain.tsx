@@ -19,6 +19,7 @@ import { platform } from "@/lib/data";
 import SubmitButton from "../form/SubmitButton";
 import { getUserProfile } from "@/actions/update-profile.actions";
 import { User } from "@prisma/client";
+import { toast } from "sonner";
 
 const Base_X = 35;
 const Base_Y = 278;
@@ -293,11 +294,15 @@ function LinkMain({
             action={async (formData: FormData) => {
               const state = await saveLinks(formData);
 
-              if (state) {
-                setState(state);
+              if (state.success) {
+                toast.success(state.success);
                 setTrash(stagedTrash);
                 setStagedTrash(null);
+              } else if (state.errors && state.errors.length > 0) {
+                toast.error("Failed to save links. Please try again.");
               }
+
+              setState(state);
             }}
           >
             {newLinks && newLinks?.length > 0 && (

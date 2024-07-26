@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { getLinks } from "@/lib/link";
 import DataProvider from "@/components/provider/DataProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,7 +31,10 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <DataProvider value={links}>{children}</DataProvider>
+        <DataProvider value={links}>
+          <Toaster position="top-right" />
+          {children}
+        </DataProvider>
       </body>
     </html>
   );
