@@ -48,7 +48,7 @@ const CopyLinkToClipboard: React.FC<CopyLinkToClipboardProps> = ({
   if (isShareButton) {
     return (
       <div className="relative">
-        <Button onClick={copyToClipboard} disabled={!url}>
+        <Button className="text-white" onClick={copyToClipboard} disabled={!url}>
           Share Link
         </Button>
         <AnimatePresence>

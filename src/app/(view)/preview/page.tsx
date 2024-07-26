@@ -60,7 +60,7 @@ async function ProfilePage() {
           </h1>
         )}
 
-        <p className="text-gray-300">{user?.email}</p>
+        <p className="text-gray-500 md:text-gray-300">{user?.email}</p>
         <div className="flex flex-col mt-8 gap-4">
           {links &&
             links.length > 5 &&
